@@ -78,3 +78,40 @@ go run main.go \
   $(kubectl exec deployments/token-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
 | jq     
 ```
+
+### Fulcio
+
+Start server
+
+```
+fulcio serve --ca ephemeralca --ct-log-url="" --config-path fulcio/config.yaml
+```
+
+Get tuf root cert
+
+```
+curl -o fulcio.crt.pem http://localhost:8080/api/v1/rootCert
+```
+
+Sign image with serivce-account token
+
+```
+SIGSTORE_ID_TOKEN=$(kubectl exec deployments/token-pod -- cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
+  cosign sign \
+  --fulcio-url http://localhost:8080 \
+  ttl.sh/ubuntu \
+  --yes \
+  --oidc-issuer https://api.s-eu01-000.garden.internal.ond-5c8f90.ci.ske.eu01.stackit.cloud \
+  --insecure-skip-verify
+```
+
+Verify signate
+
+```
+SIGSTORE_ROOT_FILE=fulcio.crt.pem \
+  cosign verify \
+  ttl.sh/ubuntu \
+  --certificate-identity=https://kubernetes.io/namespaces/default/serviceaccounts/build-robot \
+  --certificate-oidc-issuer https://api.s-eu01-000.garden.internal.ond-5c8f90.ci.ske.eu01.stackit.cloud \
+  --insecure-ignore-sct
+```

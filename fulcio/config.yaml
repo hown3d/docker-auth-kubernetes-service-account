@@ -1,0 +1,33 @@
+# need to use meta-issuers as 
+# meta-issuers:
+#   https://api.s-eu01-000.garden.internal.ond-5c8f90.ci.ske.eu01.stackit.cloud:
+oidc-issuers:
+  https://api.s-eu01-000.garden.internal.ond-5c8f90.ci.ske.eu01.stackit.cloud:
+    issuer-url: https://api.s-eu01-000.garden.internal.ond-5c8f90.ci.ske.eu01.stackit.cloud
+    # audience in serivce account token
+    client-id: kubernetes
+    type: kubernetes
+    ca-cert: |-
+      -----BEGIN CERTIFICATE-----
+      MIID5zCCAk+gAwIBAgIRAJrFjFzp82G3XtW540gHoDEwDQYJKoZIhvcNAQELBQAw
+      DTELMAkGA1UEAxMCY2EwHhcNMjUwNzA5MTYzMDEwWhcNMzUwNzA5MTYzMTEwWjAN
+      MQswCQYDVQQDEwJjYTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBALfX
+      658KBk9ENKAN8NZwWP9QEI4uh9MzD7akoNs8RaPqAZAElXvGAIridr55OH9ReIsG
+      SrsW9grvg61KE2w7ZwZcc2NzkiCAQ6cWHN5E7mrTmkrusqO9ze6W+HXFL2fwibSO
+      jWHMaVOggMnXxbz9kmZ+69JsbBzAkLr5BN6Rd2ZvWQJcYn0/HxqCSbNSYo5SyLRr
+      2xZkObkQT7GLwChycPCrSDSgmKDR5Td/6kWwLNgqRla86brq69gWUxe/BNv+/g/M
+      6m1LH5jFwJNQ+UIYM4Uj1XAst8KpzU6ac02UWi4PHj2XERPQJAfaOR2/1eCKYL8a
+      6k3kplhkmWgxs5Q02R7jjHHXicthnJ6iOpRfksMfbvwfPgS+VjHozs8gfWNvD2gY
+      FNr3u5kthM+fmesX6uo6ywrUrdbuFMwQ8p6jYF0O8Fk3oQWFzRWqaosKzbjXl69E
+      QxCCa2XuOdJ5h/dJowXfnFkqOcJbHuDJeegEp2piY8KuEb2SFvPJTVpQMHhmjwID
+      AQABo0IwQDAOBgNVHQ8BAf8EBAMCAaYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4E
+      FgQUJotfgal1SpqiDR9KB00BsGlr5XQwDQYJKoZIhvcNAQELBQADggGBAFbu+O/g
+      ok11nqgUoYaGCPtgFfZQEZcO16/877Lp0rTBW49vsFW1BZI/IKFnKs0mZ4RQmUUh
+      gW4RpbKWEeyVRJxqdy7eMlKVv/rrLS6WjpHRBbr+EHj2Wbk1leG1WF/s+Mp6VUos
+      xpTXKKxIt3A/YuWjA8pcGPtsmR3gGBPaA52yGKzg5oeAgCLfAmQXqNVZv1L1TV+y
+      KyFuKLDINoNMjHSS82B6tvPhIcLDiduaHzFhRd6DMvpc4AbN9wXmsUYKhOKCANTe
+      y4efE6DPeK0K7DYwgJJURlxQlgqy8QUWOI+n+7mI5Zd2Gb8l8dePbfVy1N746XBq
+      nxDiIyHIaL+boPbuOXoRkG+CaWB3s0MW8CpFo+HpkPeidg8FvNrtOGrzUDLoUJjw
+      uRw7qaHEgQSiSJv2tYBtSHSdqyoKZV3prA/m+rj71/H9YFz+ng9+waF0xbYxIjlV
+      9V5RCvQ5ZBCjqSG1dI2IrCnLL8oT9ROf/2HP8rIYoLOQLE/JnjL+PMlybg==
+      -----END CERTIFICATE-----
