@@ -1,0 +1,54 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prow-job
+  namespace: default
+  labels:
+    app: prow-job
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      created-by-prow: "true"
+      prow-job: myjob
+  template:
+    metadata:
+      namespace: default
+      labels:
+        created-by-prow: "true"
+        prow-job: myjob
+    spec:
+      serviceAccountName: default
+      initContainers:
+      - name: spiffe-token
+        image: ttl.sh/spire-agent
+        command:
+          - sh
+          - -c
+          - "spire-agent api fetch jwt -output json -audience prow -socketPath=$(SPIFFE_ENDPOINT_SOCKET) > /var/run/secrets/spiffe/token"
+        env:
+        - name: SPIFFE_ENDPOINT_SOCKET
+          value: /run/spire/agent.sock
+        volumeMounts:
+        - name: spire-agent-socket
+          mountPath: /run/spire/
+          readOnly: true
+        - name: spiffe-token
+          mountPath: /var/run/secrets/spiffe
+      containers:
+      - name: ubuntu
+        image: ubuntu
+        command: 
+          - sleep 
+          - "3600"
+        volumeMounts:
+        - name: spiffe-token
+          mountPath: /var/run/secrets/spiffe
+      volumes:
+      - name: spire-agent-socket
+        csi:
+          driver: "csi.spiffe.io"
+          readOnly: true
+      - name: spiffe-token
+        emptyDir: {}
